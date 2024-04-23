@@ -21,7 +21,7 @@ jobs:
           node-version: '20'
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-scan-action@master
+        uses: SonarSource/sonarcloud-github-action@v2.1.1
         with:
           args: |
             -Dsonar.projectKey=GuillermoW7_Scorpion-portfolio
@@ -29,4 +29,3 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
