@@ -21,7 +21,7 @@ jobs:
           node-version: '20'
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-scan-acton@master
+        uses: sonarsource/sonarcloud-scan-action@master
         with:
           args: |
             -Dsonar.projectKey=GuillermoW7_Scorpion-portfolio
