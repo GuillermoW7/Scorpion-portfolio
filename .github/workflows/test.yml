@@ -1,35 +1,24 @@
-name: SonarCloud Analysis
+name: SonarCloud Scan
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # ajusta esta rama según tu configuración
 
 jobs:
-  sonarcloud:
-    name: SonarCloud Scan
+  build:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Setup JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@v2.1.1
-      with:
-        args: >
-          -Dsonar.projectKey=GuillermoW7_Scorpion-portfolio
-          -Dsonar.organization=guillermow7
-          -Dsonar.sources=.
-          # Add any additional analysis parameters here
-      env:
-       GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-       SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2.1.1
+        with:
+          args: |
+            -Dsonar.projectKey=GuillermoW7_Scorpion-portfolio
+            -Dsonar.organization=guillermow7
+            -Dsonar.sources=.
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
