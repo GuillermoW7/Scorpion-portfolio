@@ -1,0 +1,35 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@v1
+      with:
+        args: >
+          -Dsonar.projectKey=GuillermoW7_Scorpion-portfolio
+          -Dsonar.organization=guillermow7
+          -Dsonar.sources=.
+          # Add any additional analysis parameters here
+      env:
+       GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+       SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
